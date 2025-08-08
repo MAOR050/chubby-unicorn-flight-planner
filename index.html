@@ -9,7 +9,7 @@
     
     <!-- Open Graph / Social Media -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://chubby-unicorn-flight-planner.infinityfreeapp.com/">
+    <meta property="og:url" content="https://YOURUSERNAME.github.io/chubby-unicorn-flight-planner/">
     <meta property="og:title" content="Chubby Unicorn - Professional Flight Planner">
     <meta property="og:description" content="Professional flight planning and management application for pilots and aviation professionals.">
     <meta property="og:image" content="./ChubbyUnicorn-PWA/images/chubby-unicorn-logo.png">
@@ -308,6 +308,54 @@
             }
         }
     </style>
+    
+    <script>
+        // Set your GitHub username here
+        const GITHUB_USERNAME = 'maor050';
+        const REPO_NAME = 'chubby-unicorn-flight-planner';
+        const RELEASE_VERSION = 'v1.1.0';
+        
+        // GitHub Release download URLs
+        const GITHUB_BASE_URL = `https://github.com/${GITHUB_USERNAME}/${REPO_NAME}/releases/download/${RELEASE_VERSION}`;
+        
+        const DOWNLOAD_URLS = {
+            windowsX64: `${GITHUB_BASE_URL}/ChubbyUnicorn-Windows-x64.zip`,
+            windowsX86: `${GITHUB_BASE_URL}/ChubbyUnicorn-Windows-x86.zip`,
+            macARM64Dmg: `${GITHUB_BASE_URL}/Chubby%20Unicorn-1.1.0-arm64.dmg`,
+            macIntelDmg: `${GITHUB_BASE_URL}/Chubby%20Unicorn-1.1.0.dmg`,
+            macARM64Zip: `${GITHUB_BASE_URL}/Chubby%20Unicorn-1.1.0-arm64-mac.zip`,
+            pwaZip: `${GITHUB_BASE_URL}/ChubbyUnicorn-PWA.zip`
+        };
+        
+        // Set download links when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            // Update download links
+            document.getElementById('download-windows-x64').href = DOWNLOAD_URLS.windowsX64;
+            document.getElementById('download-windows-x86').href = DOWNLOAD_URLS.windowsX86;
+            document.getElementById('download-mac-arm64-dmg').href = DOWNLOAD_URLS.macARM64Dmg;
+            document.getElementById('download-mac-intel-dmg').href = DOWNLOAD_URLS.macIntelDmg;
+            document.getElementById('download-mac-arm64-zip').href = DOWNLOAD_URLS.macARM64Zip;
+            document.getElementById('download-pwa-zip').href = DOWNLOAD_URLS.pwaZip;
+        });
+        
+        // Add loading animation for download buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    if (this.href && this.href.includes('github.com')) {
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '⏳ Starting download...';
+                        this.style.pointerEvents = 'none';
+                        
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                            this.style.pointerEvents = 'auto';
+                        }, 3000);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <!-- Hero Section -->
@@ -389,13 +437,13 @@
                 <h3>🖥️ Windows Applications</h3>
                 <p>Portable applications - no installation required. Just extract and run!</p>
                 <div class="download-grid">
-                    <a href="#" onclick="downloadFile('ChubbyUnicorn-Windows-x64.zip')" class="download-btn">
+                    <a href="#" id="download-windows-x64" class="download-btn">
                         📁 Windows 64-bit Portable
                     </a>
-                    <a href="#" onclick="downloadFile('ChubbyUnicorn-Windows-x86.zip')" class="download-btn">
+                    <a href="#" id="download-windows-x86" class="download-btn">
                         📁 Windows 32-bit Portable
                     </a>
-                    <a href="./START-WINDOWS.bat" class="download-btn secondary">
+                    <a href="./START-PWA.html" class="download-btn secondary">
                         🚀 Quick Launcher
                     </a>
                 </div>
@@ -406,17 +454,14 @@
                 <h3>🍎 macOS Applications</h3>
                 <p>Native Mac applications for both Intel and Apple Silicon processors</p>
                 <div class="download-grid">
-                    <a href="#" onclick="downloadFile('Chubby Unicorn-1.1.0-arm64.dmg')" class="download-btn">
+                    <a href="#" id="download-mac-arm64-dmg" class="download-btn">
                         💿 macOS Apple Silicon (.dmg)
                     </a>
-                    <a href="#" onclick="downloadFile('Chubby Unicorn-1.1.0.dmg')" class="download-btn">
+                    <a href="#" id="download-mac-intel-dmg" class="download-btn">
                         💿 macOS Intel (.dmg)
                     </a>
-                    <a href="#" onclick="downloadFile('ChubbyUnicorn-macOS-ARM64.zip')" class="download-btn secondary">
+                    <a href="#" id="download-mac-arm64-zip" class="download-btn secondary">
                         📁 ARM64 Portable
-                    </a>
-                    <a href="#" onclick="downloadFile('ChubbyUnicorn-macOS-Intel.zip')" class="download-btn secondary">
-                        📁 Intel Portable
                     </a>
                 </div>
             </div>
@@ -432,7 +477,7 @@
                     <a href="./START-PWA.html" class="download-btn secondary">
                         🚀 Universal Launcher
                     </a>
-                    <a href="#" onclick="downloadFile('ChubbyUnicorn-PWA.zip')" class="download-btn secondary">
+                    <a href="#" id="download-pwa-zip" class="download-btn secondary">
                         📁 Download PWA Files
                     </a>
                 </div>
@@ -511,66 +556,5 @@
             </p>
         </div>
     </div>
-
-    <script>
-        // Handle file downloads
-        function downloadFile(filename) {
-            // Create a temporary link element
-            const link = document.createElement('a');
-            link.href = './' + filename;
-            link.download = filename;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        // Add smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add loading animation for download buttons
-        document.querySelectorAll('.download-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                if (this.onclick) {
-                    const originalText = this.innerHTML;
-                    this.innerHTML = '⏳ Preparing download...';
-                    this.style.pointerEvents = 'none';
-                    
-                    setTimeout(() => {
-                        this.innerHTML = originalText;
-                        this.style.pointerEvents = 'auto';
-                    }, 2000);
-                }
-            });
-        });
-
-        // Add PWA install prompt handling
-        let deferredPrompt;
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            // Prevent Chrome 67 and earlier from automatically showing the prompt
-            e.preventDefault();
-            // Stash the event so it can be triggered later
-            deferredPrompt = e;
-            
-            // Show custom install button if desired
-            console.log('PWA install prompt available');
-        });
-
-        // Track PWA installation
-        window.addEventListener('appinstalled', (evt) => {
-            console.log('PWA was installed');
-        });
-    </script>
 </body>
 </html>
