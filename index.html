@@ -321,11 +321,20 @@
         const DOWNLOAD_URLS = {
             windowsX64: `${GITHUB_BASE_URL}/ChubbyUnicorn-Windows-x64.zip`,
             windowsX86: `${GITHUB_BASE_URL}/ChubbyUnicorn-Windows-x86.zip`,
-            macARM64Dmg: `${GITHUB_BASE_URL}/Chubby%20Unicorn-1.1.0-arm64.dmg`,
-            macIntelDmg: `${GITHUB_BASE_URL}/Chubby%20Unicorn-1.1.0.dmg`,
-            macARM64Zip: `${GITHUB_BASE_URL}/Chubby%20Unicorn-1.1.0-arm64-mac.zip`,
+            macARM64Dmg: `${GITHUB_BASE_URL}/Chubby.Unicorn-1.1.0-arm64.dmg`,
+            macARM64Zip: `${GITHUB_BASE_URL}/Chubby.Unicorn-1.1.0-arm64-mac.zip`,
             pwaZip: `${GITHUB_BASE_URL}/ChubbyUnicorn-PWA.zip`
         };
+        
+        // Fallback URLs - if GitHub Release doesn't exist yet, show helpful message
+        function checkAndUpdateDownloadLinks() {
+            document.querySelectorAll('.download-btn[href="#"]').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('⚠️ GitHub Release not found!\n\nPlease:\n1. Go to your GitHub repository\n2. Create a new release (v1.1.0)\n3. Upload the large ZIP/DMG files to the release\n4. The download links will work automatically!');
+                });
+            });
+        }
         
         // Set download links when page loads
         window.addEventListener('DOMContentLoaded', function() {
@@ -333,9 +342,17 @@
             document.getElementById('download-windows-x64').href = DOWNLOAD_URLS.windowsX64;
             document.getElementById('download-windows-x86').href = DOWNLOAD_URLS.windowsX86;
             document.getElementById('download-mac-arm64-dmg').href = DOWNLOAD_URLS.macARM64Dmg;
-            document.getElementById('download-mac-intel-dmg').href = DOWNLOAD_URLS.macIntelDmg;
             document.getElementById('download-mac-arm64-zip').href = DOWNLOAD_URLS.macARM64Zip;
             document.getElementById('download-pwa-zip').href = DOWNLOAD_URLS.pwaZip;
+            
+            // Hide the Intel Mac DMG button since we can't upload it
+            const intelButton = document.getElementById('download-mac-intel-dmg');
+            if (intelButton) {
+                intelButton.style.display = 'none';
+            }
+            
+            // Setup fallback for broken links
+            checkAndUpdateDownloadLinks();
         });
         
         // Add loading animation for download buttons
@@ -452,16 +469,16 @@
             <!-- macOS Section -->
             <div class="platform-section">
                 <h3>🍎 macOS Applications</h3>
-                <p>Native Mac applications for both Intel and Apple Silicon processors</p>
+                <p>Native Mac applications for Apple Silicon processors</p>
                 <div class="download-grid">
                     <a href="#" id="download-mac-arm64-dmg" class="download-btn">
                         💿 macOS Apple Silicon (.dmg)
                     </a>
-                    <a href="#" id="download-mac-intel-dmg" class="download-btn">
-                        💿 macOS Intel (.dmg)
-                    </a>
                     <a href="#" id="download-mac-arm64-zip" class="download-btn secondary">
                         📁 ARM64 Portable
+                    </a>
+                    <a href="./ChubbyUnicorn-PWA/index.html" target="_blank" class="download-btn secondary">
+                        🌐 Universal Web Version
                     </a>
                 </div>
             </div>
