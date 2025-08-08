@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦄 Chubby Unicorn Launcher</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 3rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        .button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+        .button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .button.primary {
+            background: #5D15F5;
+            border-color: #5D15F5;
+        }
+        .button.primary:hover {
+            background: #4A0FDB;
+            border-color: #4A0FDB;
+        }
+        .info {
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .options {
+            margin: 2rem 0;
+        }
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 1rem auto;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .status {
+            margin-top: 1rem;
+            font-weight: bold;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🦄 Chubby Unicorn</h1>
+        <p class="subtitle">Professional Flight Planner</p>
+        
+        <div class="options">
+            <a href="#" class="button primary" onclick="startLocal()">
+                🚀 Start Application
+            </a>
+            <br>
+            <a href="dist/index.html" class="button" target="_blank">
+                🌐 Open PWA Version
+            </a>
+        </div>
+
+        <div class="spinner" id="spinner"></div>
+        <div class="status" id="status"></div>
+        
+        <div class="info">
+            <p><strong>Quick Start Options:</strong></p>
+            <p>• <strong>Local Server:</strong> Click "Start Application" to launch with local server</p>
+            <p>• <strong>Direct PWA:</strong> Click "Open PWA Version" for instant access</p>
+            <p>• <strong>Mobile:</strong> Use Android APK or open in mobile browser</p>
+            <br>
+            <p><strong>Features:</strong></p>
+            <p>✅ Works offline after installation<br>
+               ✅ Responsive design for all devices<br>
+               ✅ Professional flight planning tools<br>
+               ✅ No server setup required</p>
+        </div>
+    </div>
+
+    <script>
+        function showStatus(message, isError = false) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.style.display = 'block';
+            status.style.color = isError ? '#ff6b6b' : '#4ecdc4';
+        }
+
+        function showSpinner() {
+            document.getElementById('spinner').style.display = 'block';
+        }
+
+        function hideSpinner() {
+            document.getElementById('spinner').style.display = 'none';
+        }
+
+        async function startLocal() {
+            showSpinner();
+            showStatus('Starting local server...');
+            
+            try {
+                // Try to start a local server using various methods
+                if (typeof require !== 'undefined') {
+                    // Node.js environment
+                    const { spawn } = require('child_process');
+                    const server = spawn('python3', ['-m', 'http.server', '8080'], {
+                        cwd: 'dist'
+                    });
+                    
+                    setTimeout(() => {
+                        hideSpinner();
+                        showStatus('Server started! Opening application...');
+                        window.open('http://localhost:8080', '_blank');
+                    }, 2000);
+                } else {
+                    // Browser environment - redirect to dist
+                    hideSpinner();
+                    showStatus('Opening PWA version...');
+                    setTimeout(() => {
+                        window.open('dist/index.html', '_blank');
+                    }, 1000);
+                }
+            } catch (error) {
+                hideSpinner();
+                showStatus('Opening PWA version as fallback...', true);
+                setTimeout(() => {
+                    window.open('dist/index.html', '_blank');
+                }, 2000);
+            }
+        }
+
+        // Auto-detect environment and show appropriate message
+        window.addEventListener('load', () => {
+            if (window.location.protocol === 'file:') {
+                showStatus('File mode detected - PWA version recommended for full functionality');
+            }
+        });
+    </script>
+</body>
+</html>

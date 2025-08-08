@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦄 Chubby Unicorn - Professional Flight Planner</title>
+    <meta name="description" content="Professional flight planning and management application. Works on Windows, Mac, Android, iOS, and all web browsers. No server setup required!">
+    <meta name="keywords" content="flight planner, aviation, pilot, aircraft, navigation, flight planning software">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chubby-unicorn-flight-planner.infinityfreeapp.com/">
+    <meta property="og:title" content="Chubby Unicorn - Professional Flight Planner">
+    <meta property="og:description" content="Professional flight planning and management application for pilots and aviation professionals.">
+    <meta property="og:image" content="./ChubbyUnicorn-PWA/images/chubby-unicorn-logo.png">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./ChubbyUnicorn-PWA/icon-192.png" type="image/png">
+    <link rel="apple-touch-icon" href="./ChubbyUnicorn-PWA/icon-192.png">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 20px;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .quick-start {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .quick-start h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .quick-link {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+        }
+        
+        .quick-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: #5D15F5;
+        }
+        
+        .quick-link h3 {
+            color: #5D15F5;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .quick-link p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .downloads {
+            background: white;
+            margin: 20px;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .downloads h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+        
+        .platform-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #5D15F5;
+        }
+        
+        .platform-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #5D15F5;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .download-btn {
+            display: inline-block;
+            background: #5D15F5;
+            color: white;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .download-btn:hover {
+            background: #4A0FDB;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(93, 21, 245, 0.3);
+        }
+        
+        .download-btn.secondary {
+            background: transparent;
+            color: #5D15F5;
+            border: 2px solid #5D15F5;
+        }
+        
+        .download-btn.secondary:hover {
+            background: #5D15F5;
+            color: white;
+        }
+        
+        .features {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 20px;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+        }
+        
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature h3 {
+            color: #5D15F5;
+            margin-bottom: 1rem;
+        }
+        
+        .instructions {
+            background: white;
+            margin: 20px;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .instructions h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #5D15F5;
+        }
+        
+        .step-number {
+            background: #5D15F5;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            color: #5D15F5;
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .container {
+                padding: 0 10px;
+            }
+            
+            .hero, .downloads, .features, .instructions {
+                margin: 10px;
+                padding: 2rem 1rem;
+            }
+            
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin: 0 auto 1rem auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <h1>🦄 Chubby Unicorn</h1>
+            <p>Professional Flight Planning & Management System</p>
+            
+            <div class="quick-start">
+                <h2>🚀 Try It Now - No Installation Required!</h2>
+                <div class="quick-links">
+                    <a href="./START-PWA.html" class="quick-link">
+                        <h3>🌐 Try Web Version</h3>
+                        <p>Works instantly in any browser</p>
+                    </a>
+                    <a href="./ChubbyUnicorn-PWA/index.html" class="quick-link">
+                        <h3>📱 Launch PWA</h3>
+                        <p>Direct access to the app</p>
+                    </a>
+                    <a href="#downloads" class="quick-link">
+                        <h3>💻 Download Desktop</h3>
+                        <p>Native apps for Windows & Mac</p>
+                    </a>
+                    <a href="#instructions" class="quick-link">
+                        <h3>📖 View Instructions</h3>
+                        <p>Step-by-step setup guide</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="features">
+        <div class="container">
+            <h2>✨ Key Features</h2>
+            <div class="features-grid">
+                <div class="feature">
+                    <div class="feature-icon">🛩️</div>
+                    <h3>Complete Flight Planning</h3>
+                    <p>Create detailed flight plans with waypoints, fuel calculations, and route optimization</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>Real-Time Calculations</h3>
+                    <p>Automatic fuel consumption, wind corrections, and performance monitoring</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Multi-Device Sync</h3>
+                    <p>Engineer, Navigator, and Pilot roles with real-time synchronization</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📱</div>
+                    <h3>Universal Compatibility</h3>
+                    <p>Works on Windows, Mac, Android, iOS, and all modern web browsers</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Offline Capable</h3>
+                    <p>Full functionality without internet connection after installation</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>No Setup Required</h3>
+                    <p>Portable applications and PWA - works immediately</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Downloads Section -->
+    <div class="downloads" id="downloads">
+        <div class="container">
+            <h2>📦 Download Options</h2>
+            
+            <!-- Windows Section -->
+            <div class="platform-section">
+                <h3>🖥️ Windows Applications</h3>
+                <p>Portable applications - no installation required. Just extract and run!</p>
+                <div class="download-grid">
+                    <a href="#" onclick="downloadFile('ChubbyUnicorn-Windows-x64.zip')" class="download-btn">
+                        📁 Windows 64-bit Portable
+                    </a>
+                    <a href="#" onclick="downloadFile('ChubbyUnicorn-Windows-x86.zip')" class="download-btn">
+                        📁 Windows 32-bit Portable
+                    </a>
+                    <a href="./START-WINDOWS.bat" class="download-btn secondary">
+                        🚀 Quick Launcher
+                    </a>
+                </div>
+            </div>
+
+            <!-- macOS Section -->
+            <div class="platform-section">
+                <h3>🍎 macOS Applications</h3>
+                <p>Native Mac applications for both Intel and Apple Silicon processors</p>
+                <div class="download-grid">
+                    <a href="#" onclick="downloadFile('Chubby Unicorn-1.1.0-arm64.dmg')" class="download-btn">
+                        💿 macOS Apple Silicon (.dmg)
+                    </a>
+                    <a href="#" onclick="downloadFile('Chubby Unicorn-1.1.0.dmg')" class="download-btn">
+                        💿 macOS Intel (.dmg)
+                    </a>
+                    <a href="#" onclick="downloadFile('ChubbyUnicorn-macOS-ARM64.zip')" class="download-btn secondary">
+                        📁 ARM64 Portable
+                    </a>
+                    <a href="#" onclick="downloadFile('ChubbyUnicorn-macOS-Intel.zip')" class="download-btn secondary">
+                        📁 Intel Portable
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile Section -->
+            <div class="platform-section">
+                <h3>📱 Mobile & Universal</h3>
+                <p>Progressive Web App works on all devices - phones, tablets, and computers</p>
+                <div class="download-grid">
+                    <a href="./ChubbyUnicorn-PWA/index.html" target="_blank" class="download-btn">
+                        🌐 Launch PWA Now
+                    </a>
+                    <a href="./START-PWA.html" class="download-btn secondary">
+                        🚀 Universal Launcher
+                    </a>
+                    <a href="#" onclick="downloadFile('ChubbyUnicorn-PWA.zip')" class="download-btn secondary">
+                        📁 Download PWA Files
+                    </a>
+                </div>
+            </div>
+
+            <!-- Documentation -->
+            <div class="platform-section">
+                <h3>📚 Documentation & Support</h3>
+                <p>Complete guides and instructions for all platforms</p>
+                <div class="download-grid">
+                    <a href="./USER-MANUAL.md" target="_blank" class="download-btn">
+                        📖 User Manual
+                    </a>
+                    <a href="./README.txt" target="_blank" class="download-btn secondary">
+                        📋 Quick Start Guide
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Instructions Section -->
+    <div class="instructions" id="instructions">
+        <div class="container">
+            <h2>📖 Installation Instructions</h2>
+            
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Choose Your Platform</h3>
+                    <p><strong>Easiest:</strong> Click "Launch PWA Now" above - works immediately in any browser<br>
+                    <strong>Desktop:</strong> Download the appropriate version for your operating system<br>
+                    <strong>Mobile:</strong> Use the PWA version - installs like a native app</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Installation Process</h3>
+                    <p><strong>Windows:</strong> Extract the ZIP file and run "Chubby Unicorn.exe"<br>
+                    <strong>macOS:</strong> Open the .dmg file and drag to Applications folder<br>
+                    <strong>PWA:</strong> Open in browser, click install prompt when it appears</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>First Launch</h3>
+                    <p>The application will start immediately - no setup or configuration required!<br>
+                    All data is stored locally on your device for privacy and offline access.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Troubleshooting</h3>
+                    <p><strong>If blocked:</strong> Windows/Mac security may require you to allow the app<br>
+                    <strong>Alternative:</strong> Try the PWA version as a universal fallback<br>
+                    <strong>Support:</strong> See the User Manual for detailed troubleshooting</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <p><strong>🦄 Chubby Unicorn Flight Planner</strong></p>
+            <p>Professional flight planning software for aviation professionals</p>
+            <p>Works offline • No server required • Universal compatibility</p>
+            <p style="margin-top: 1rem; opacity: 0.7;">
+                © 2024 Chubby Unicorn Flight Planner. All rights reserved.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Handle file downloads
+        function downloadFile(filename) {
+            // Create a temporary link element
+            const link = document.createElement('a');
+            link.href = './' + filename;
+            link.download = filename;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation for download buttons
+        document.querySelectorAll('.download-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.onclick) {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '⏳ Preparing download...';
+                    this.style.pointerEvents = 'none';
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.style.pointerEvents = 'auto';
+                    }, 2000);
+                }
+            });
+        });
+
+        // Add PWA install prompt handling
+        let deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            deferredPrompt = e;
+            
+            // Show custom install button if desired
+            console.log('PWA install prompt available');
+        });
+
+        // Track PWA installation
+        window.addEventListener('appinstalled', (evt) => {
+            console.log('PWA was installed');
+        });
+    </script>
+</body>
+</html>
