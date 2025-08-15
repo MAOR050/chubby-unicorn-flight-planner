@@ -1,0 +1,57 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="108" fill="#1E4D8B"/>
+  <g transform="translate(56, 100)">
+    <!-- Unicorn body -->
+    <ellipse cx="200" cy="220" rx="120" ry="90" fill="#D4A5A5" stroke="#2D3748" stroke-width="8"/>
+    
+    <!-- Unicorn head -->
+    <ellipse cx="120" cy="180" rx="80" ry="70" fill="#D4A5A5" stroke="#2D3748" stroke-width="8"/>
+    
+    <!-- Horn -->
+    <path d="M100 150 L90 100 L110 100 Z" fill="#FFD700" stroke="#2D3748" stroke-width="6"/>
+    <path d="M110 150 L100 100 L120 100 Z" fill="#FFA500" stroke="#2D3748" stroke-width="6"/>
+    
+    <!-- Eye -->
+    <circle cx="100" cy="170" r="8" fill="#2D3748"/>
+    <circle cx="98" cy="168" r="3" fill="white"/>
+    
+    <!-- Smile -->
+    <path d="M80 190 Q100 200 120 190" stroke="#2D3748" stroke-width="6" fill="none" stroke-linecap="round"/>
+    
+    <!-- Airplane on top -->
+    <g transform="translate(120, 80)">
+      <!-- Fuselage -->
+      <rect x="0" y="0" width="150" height="30" rx="15" fill="#FFA500" stroke="#2D3748" stroke-width="6"/>
+      
+      <!-- Wings -->
+      <rect x="40" y="-10" width="70" height="50" rx="5" fill="#FFD700" stroke="#2D3748" stroke-width="6"/>
+      
+      <!-- Tail -->
+      <path d="M140 -20 L150 -10 L150 40 L140 30 Z" fill="#FFA500" stroke="#2D3748" stroke-width="6"/>
+      
+      <!-- Propellers -->
+      <circle cx="15" cy="15" r="4" fill="#4A90E2"/>
+      <rect x="5" y="13" width="20" height="4" rx="2" fill="#4A90E2" stroke="#2D3748" stroke-width="3"/>
+      <rect x="13" y="5" width="4" height="20" rx="2" fill="#4A90E2" stroke="#2D3748" stroke-width="3"/>
+      
+      <circle cx="135" cy="15" r="4" fill="#4A90E2"/>
+      <rect x="125" y="13" width="20" height="4" rx="2" fill="#4A90E2" stroke="#2D3748" stroke-width="3"/>
+      <rect x="133" y="5" width="4" height="20" rx="2" fill="#4A90E2" stroke="#2D3748" stroke-width="3"/>
+    </g>
+    
+    <!-- Legs -->
+    <rect x="100" y="280" width="25" height="40" rx="12" fill="#D4A5A5" stroke="#2D3748" stroke-width="6"/>
+    <rect x="140" y="280" width="25" height="40" rx="12" fill="#D4A5A5" stroke="#2D3748" stroke-width="6"/>
+    <rect x="220" y="280" width="25" height="40" rx="12" fill="#D4A5A5" stroke="#2D3748" stroke-width="6"/>
+    <rect x="260" y="280" width="25" height="40" rx="12" fill="#D4A5A5" stroke="#2D3748" stroke-width="6"/>
+    
+    <!-- Hooves -->
+    <ellipse cx="112" cy="320" rx="15" ry="8" fill="#FFD700" stroke="#2D3748" stroke-width="4"/>
+    <ellipse cx="152" cy="320" rx="15" ry="8" fill="#FFD700" stroke="#2D3748" stroke-width="4"/>
+    <ellipse cx="232" cy="320" rx="15" ry="8" fill="#FFD700" stroke="#2D3748" stroke-width="4"/>
+    <ellipse cx="272" cy="320" rx="15" ry="8" fill="#FFD700" stroke="#2D3748" stroke-width="4"/>
+    
+    <!-- Tail -->
+    <path d="M300 200 Q340 180 350 220 Q340 240 320 230" fill="#D4A5A5" stroke="#2D3748" stroke-width="6"/>
+  </g>
+</svg>
